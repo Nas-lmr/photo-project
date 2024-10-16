@@ -9,7 +9,7 @@ export default function ContentMenu({ isOpen, onClose }: IBurgerMenu) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500); // Simuler le chargement
+    const timer = setTimeout(() => setLoading(false), 100); // Simuler le chargement
     return () => clearTimeout(timer);
   }, []);
 
@@ -19,7 +19,7 @@ export default function ContentMenu({ isOpen, onClose }: IBurgerMenu) {
 
   return (
     <div
-      className={`absolute top-0 right-0 w-3/4 h-full p-4 bg-[#E5D1B8] transition-transform transform ${
+      className={`absolute top-0 right-0 w-3/4 h-full p-4 bg-brunCafe transition-transform transform ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
