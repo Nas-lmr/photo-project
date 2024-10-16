@@ -9,8 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        beige: "#E5D1B8",
+        vertMousse: "#708A81",
+        brunCafe: "#C2956E",
+        brunFonce: "#2B2129",
+        orangeClair: "#DD8E58",
+      },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },
