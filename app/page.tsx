@@ -1,12 +1,14 @@
-import CardCotainer from "@/components/container/CardContainer";
+import CarouselMain from "@/components/global/CarouselMain";
+import HeroSection from "@/components/global/HeroSection";
+import IntroMain from "@/components/global/IntroMain";
 
 export default function Home() {
   return (
-    <div className="w-full h-full">
-      <main className="w-full h-full">
-        <div>
-          <CardCotainer />
-        </div>
+    <div className="w-screen h-extra">
+      <main className="w-full h-full pt-12 flex flex-col">
+        <HeroSection />
+        <IntroMain />
+        <CarouselMain />
       </main>
       <footer></footer>
     </div>

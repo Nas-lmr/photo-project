@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -28,17 +27,20 @@ export default function DetailPage() {
       const data: DataType = {
         1: {
           title: "Fennec",
-          description: "Un magnifique fennec se reposant",
+          description:
+            "Le fennec, ou Vulpes zerda, est un petit renard originaire des déserts du Sahara en Afrique du Nord. Reconnaissable à ses grandes oreilles qui peuvent mesurer jusqu'à 15 centimètres, le fennec utilise ces appendices pour réguler sa température corporelle et améliorer son ouïe, lui permettant ainsi de détecter des proies enfouies sous le sable. Ce carnivore nocturne se nourrit principalement d'insectes, de petits rongeurs et de fruits. Adapté à des conditions arides, le fennec possède un pelage beige clair qui lui offre un excellent camouflage dans son environnement désertique, tout en reflétant la chaleur. En tant qu'animal social, il vit souvent en groupes, se réfugiant dans des terriers pour se protéger des températures extrêmes du jour.",
           image: "/images/fennec.jpg",
         },
         2: {
           title: "Tigre",
-          description: "Un magnifique tigre s'abreuvant",
+          description:
+            "Le tigre (Panthera tigris) est le plus grand félin du monde et un symbole puissant de la faune sauvage. Reconnaissable à sa fourrure rayée orange et noire, le tigre est un prédateur redoutable qui habite principalement les forêts, les savanes et les marais d'Asie. Il est connu pour sa force, sa furtivité et sa capacité à chasser des proies allant des cerfs aux sangliers. Les tigres sont des animaux solitaires, marquant leur territoire avec des griffures sur les arbres et des urines odorantes. Malheureusement, ces majestueux félins sont menacés par la perte de leur habitat, le braconnage et le commerce illégal, ce qui a conduit à un déclin dramatique de leur population. Des efforts de conservation sont en cours pour protéger cette espèce emblématique et son environnement naturel, soulignant l'importance de la biodiversité dans nos écosystèmes.",
           image: "/images/tigre.jpg",
         },
         3: {
           title: "Lion",
-          description: "Un magnifique lion cherchant sa proie",
+          description:
+            "Le lion (Panthera leo), souvent appelé le “roi de la jungle”, est un grand félin majestueux qui vit principalement dans les savanes d'Afrique. Les mâles se distinguent par leur crinière imposante. Ces animaux sociaux vivent en groupes appelés “prides”, composés de femelles, de leurs petits et d'un ou plusieurs mâles. En tant que prédateurs de sommet, ils chassent des proies telles que les zèbres et les buffles. Malheureusement, les lions sont menacés par la perte d'habitat et le braconnage, entraînant un déclin de leur population. Des efforts de conservation sont en cours pour protéger ces animaux emblématiques et leur écosystème.",
           image: "/images/lion.jpg",
         },
       };
@@ -55,15 +57,16 @@ export default function DetailPage() {
   if (!cardDetails) return <p>Chargement...</p>;
 
   return (
-    <div className="p-4">
-      <Image
+    <div className=" h-full w-full p-4 flex flex-col items-center">
+      <img
         src={cardDetails.image}
         alt={cardDetails.title}
-        width={200}
-        height={200}
+        className="w-full h-3/4 rounded-lg"
       />
-      <h1 className="text-2xl font-bold">{cardDetails.title}</h1>
-      <p>{cardDetails.description}</p>
+      <div className=" w-full flex flex-col items-start">
+        <h1 className="text-2xl">{cardDetails.title}</h1>
+        <p className="text-justify">{cardDetails.description}</p>
+      </div>
     </div>
   );
 }

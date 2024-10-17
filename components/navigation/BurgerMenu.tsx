@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Assurez-vous que ce composant est un composant client
 
 import Image from "next/image";
 import { useState } from "react";
@@ -9,19 +9,20 @@ export default function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpen(true);
+    setIsOpen((prev) => !prev); // Toggle l'état du menu
   };
+
   const closeMenu = () => {
     setIsOpen(false);
   };
 
   return (
     <>
-      <button className="border-0" onClick={toggleMenu}>
+      <button className="border-0 md:hidden" onClick={toggleMenu}>
         <Image src={burgerMenuIcon} alt="Menu Burger" className="h-6 w-6" />
       </button>
 
-      {isOpen && <ContentMenu isOpen={isOpen} onClose={closeMenu} />}
+      <ContentMenu isOpen={isOpen} onClose={closeMenu} />
     </>
   );
 }

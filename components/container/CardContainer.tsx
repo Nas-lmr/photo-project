@@ -20,7 +20,7 @@ const info = [
 
 export default function CardContainer() {
   return (
-    <div className="w-full h-3/4 flex flex-col items-center p-4 gap-4">
+    <div className="w-full h-3/4 flex flex-col items-center md:flex-row md:flex-wrap md:justify-center  p-4 gap-4">
       {info.map((infos, index) => (
         <Card
           key={index}
