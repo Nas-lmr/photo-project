@@ -1,4 +1,4 @@
-"use client"; // Assurez-vous que ce composant est un composant client
+"use client";
 
 import Image from "next/image";
 import { useState } from "react";
@@ -9,7 +9,7 @@ export default function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpen((prev) => !prev); // Toggle l'état du menu
+    setIsOpen((prev) => !prev);
   };
 
   const closeMenu = () => {

@@ -1,31 +1,50 @@
+"use client";
+
+import { IPhoto } from "@/interfaces/common/IPhoto";
+import { useEffect, useState } from "react";
+import { fetchPhotos } from "../../services/photoService";
 import Card from "../cards/Card";
 
-const info = [
-  {
-    image: "/images/fennec.jpg",
-    title: "Fennec",
-    description: "Un magnifique fennec se reposant",
-  },
-  {
-    image: "/images/tigre.jpg",
-    title: "Tigre",
-    description: "Un magnifique tigre s'abreuvant",
-  },
-  {
-    image: "/images/lion.jpg",
-    title: "Lion",
-    description: "Un magnifique lion cherchant sa proie",
-  },
-];
-
 export default function CardContainer() {
+  const [info, setInfo] = useState<IPhoto[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadPhotos = async () => {
+      setLoading(true);
+      try {
+        const photos = await fetchPhotos();
+        setInfo(photos);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Une erreur inconnue est survenue.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPhotos();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Erreur: {error}</div>;
+  }
+
   return (
-    <div className="w-full h-3/4 flex flex-col items-center md:flex-row md:flex-wrap md:justify-center  p-4 gap-4">
-      {info.map((infos, index) => (
+    <div className="w-full lg:w-4/5 h-3/4 flex flex-col items-center md:flex-row md:flex-wrap md:justify-center p-4 gap-4">
+      {info.map((infos) => (
         <Card
-          key={index}
-          id={index + 1}
-          image={infos.image}
+          key={infos.id}
+          id={infos.id}
+          image={infos.url}
           title={infos.title}
           description={infos.description}
         />

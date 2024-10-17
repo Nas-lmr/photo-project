@@ -1,53 +1,73 @@
 "use client";
 
-import { useState } from "react";
+import { IPhoto } from "@/interfaces/common/IPhoto";
+import { useEffect, useState } from "react";
+import { fetchPhotos } from "../../services/photoService";
 import CarouselCard from "../cards/CarouselCard";
 
-const info = [
-  {
-    image: "/images/fennec.jpg",
-    title: "Fennec",
-    description: "Un magnifique fennec se reposant",
-  },
-  {
-    image: "/images/tigre.jpg",
-    title: "Tigre",
-    description: "Un magnifique tigre s'abreuvant",
-  },
-  {
-    image: "/images/lion.jpg",
-    title: "Lion",
-    description: "Un magnifique lion cherchant sa proie",
-  },
-];
-
 export default function CarouselMain() {
+  const [photos, setPhotos] = useState<IPhoto[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(""); // Pour gérer la direction
+  const [direction, setDirection] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadPhotos = async () => {
+      try {
+        const allPhotos = await fetchPhotos();
+        const randomPhotos = getRandomPhotos(allPhotos, 3);
+        setPhotos(randomPhotos);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Une erreur inconnue est survenue.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPhotos();
+  }, []);
+
+  const getRandomPhotos = (photosArray: IPhoto[], count: number) => {
+    const shuffled = [...photosArray].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
 
   const nextSlide = () => {
-    setDirection("next"); // Définir la direction à 'next'
+    setDirection("next");
     setTimeout(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === info.length - 1 ? 0 : prevIndex + 1
+        prevIndex === photos.length - 1 ? 0 : prevIndex + 1
       );
-      setDirection(""); // Réinitialiser la direction après changement d'index
-    }, 300); // Temps d'attente avant de changer la carte
+      setDirection("");
+    }, 300);
   };
 
   const prevSlide = () => {
-    setDirection("prev"); // Définir la direction à 'prev'
+    setDirection("prev");
     setTimeout(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === 0 ? info.length - 1 : prevIndex - 1
+        prevIndex === 0 ? photos.length - 1 : prevIndex - 1
       );
-      setDirection(""); // Réinitialiser la direction après changement d'index
-    }, 300); // Temps d'attente avant de changer la carte
+      setDirection("");
+    }, 300);
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Erreur: {error}</div>;
+  }
 
   return (
     <>
-      <h3 className="text-xl lg:text-3xl px-4  lg:p-8 font-semibold">
+      <h3 className="text-xl md:text-2xl lg:text-3xl px-4 lg:p-8 font-semibold">
         Instants capturés !
       </h3>
       <div className="md:hidden relative h-80 flex flex-col items-center justify-around">
@@ -61,10 +81,10 @@ export default function CarouselMain() {
           }`}
         >
           <CarouselCard
-            id={currentIndex + 1}
-            image={info[currentIndex].image}
-            title={info[currentIndex].title}
-            description={info[currentIndex].description}
+            id={photos[currentIndex]?.id}
+            image={photos[currentIndex]?.url}
+            title={photos[currentIndex]?.title}
+            description={photos[currentIndex]?.description}
           />
         </div>
 
@@ -83,13 +103,14 @@ export default function CarouselMain() {
           </button>
         </div>
       </div>
-      <div className="hidden w-full h-96 md:flex flex-col items-center md:flex-row md:flex-wrap md:justify-center  p-4 gap-4 md:gap-6">
-        {info.map((infos, index) => (
+      <div className="hidden w-full h-96 md:flex flex-col items-center md:flex-row md:flex-wrap md:justify-center p-4 gap-4 md:gap-6">
+        {photos.map((photo) => (
           <CarouselCard
-            key={index}
-            id={index + 1}
-            image={infos.image}
-            title={infos.title}
+            key={photo.id}
+            id={photo.id}
+            image={photo.url}
+            title={photo.title}
+            description={photo.description}
           />
         ))}
       </div>
