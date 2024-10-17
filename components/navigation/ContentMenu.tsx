@@ -1,4 +1,4 @@
-"use client"; // Assurez-vous que ce composant est un composant client
+"use client";
 
 import { IBurgerMenu } from "@/interfaces/components/IBurgerMenu";
 import Image from "next/image";
@@ -7,7 +7,7 @@ import CloseIcon from "../../public/icons/cross.svg";
 
 export default function ContentMenu({ isOpen, onClose }: IBurgerMenu) {
   const handleLinkClick = () => {
-    onClose(); // Ferme le menu
+    onClose();
   };
 
   return (
