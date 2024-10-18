@@ -67,7 +67,7 @@ export default function CarouselMain() {
 
   return (
     <>
-      <h3 className="text-xl md:text-2xl lg:text-3xl px-4 lg:p-8 font-semibold">
+      <h3 className=" text-grayDark text-xl md:text-2xl lg:text-3xl px-4 lg:p-8 font-semibold">
         Instants capturés !
       </h3>
       <div className="md:hidden relative h-80 flex flex-col items-center justify-around">
