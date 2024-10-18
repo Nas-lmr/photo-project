@@ -16,8 +16,7 @@ export default function ContentMenu({ isOpen, onClose }: IBurgerMenu) {
         isOpen ? "translate-x-0" : "translate-x-full"
       } z-40`}
     >
-      <div className="w-full h-14 flex justify-between items-center p-4">
-        <h2 className="text-lg font-bold">Menu</h2>
+      <div className="w-full h-14 flex justify-end items-center p-4">
         <button onClick={onClose}>
           <Image src={CloseIcon} alt="Croix" className="h-6 w-6" />
         </button>
