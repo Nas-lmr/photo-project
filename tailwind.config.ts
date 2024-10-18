@@ -9,8 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        grayDark: "#313131",
+        grayMid: "#5f5f5f",
+        grayLight: "#f2ecff",
+        greenLight: "#00c896",
+      },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+      },
+      height: {
+        mid: "30rem",
+        big: "35rem",
+        large: "40rem",
+        extra: "150vh",
       },
     },
   },
